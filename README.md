@@ -21,54 +21,19 @@ echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-### 5. Inicializar la base de datos utilizando sqlcmd y initDB.sql
+### 5. Inicializar la base de datos
+Se usa el siguiente comando para inicializar la base de datos
 ```sh
-sqlcmd -S localhost -U sa -P YourPassword123! -i initDB.sql
+sqlcmd -S localhost -U sa -P YourPassword123! -i init.sql
 ```
-Si todo sale bien, deberiamos de ver un mensaje como el siguiente
-```sh 
-Changed database context to 'Lienzo'.
-```
-Asi mismo, podemos utilizar sqlcmd para verificar que nuestra base de 
-datos se haya creado de manera exitosa dentro de nuestra instancia de docker
+
+### 7. Iniciar el servidor 
 ```sh
-sqlcmd -S localhost -U sa -P YourPassword123!
-> SELECT name FROM sys.databases;
-> GO
+npm run dev
 ```
-### 6) Inicializar datos dentro de la base de datos
-```sh
-sqlcmd -S localhost -U sa -P YourPassword123! -i insertTest.sql
-```
-Este script de sql llena la base de datos de alumno y departamento con datos dummmy,
-podemos revisar que todo este en orden utilizando sqlcmd nuevamente
 
-```sh
-sqlcmd -S localhost -U sa -P YourPassword123!
-> USE Highpoint
-> SELECT * FROM departamento
-> SELECT * FROM alumno
-> GO
-```
-Deberiamos de poder ver los nuevos datos dentro de la base de datos
+### 6. Insertar datos a la base de datos
+Se pueden insertar usuarios mediante el metodo post a la ruta ```http://localhost:8080/api/users```, incluyendo los datos de ```firstName```, ```lastName``` y ```email```
 
-### 7) Iniciar el servidor 
-```sh
-npm run start
-```
-Esperando el mensaje en terminal
-```sh
-Servidor en localhost:3000
-conectado a sql
-```
-Si visitamos ```http://localhost:3000/departamentos``` o ```http://localhost:3000/alumnos``` deberiamos 
-de poder observar los datos que acabamos de insertar. 
-
-<img width="436" alt="image" src="https://github.com/user-attachments/assets/4648d33d-064a-4e51-b3f1-96eacb3b0298" />
-
-Podemos obtener la misma información atravez de POSTMAN
-
-<img width="1338" alt="image" src="https://github.com/user-attachments/assets/aa76377a-2ba2-43fd-a4f6-64d124027fc5" />
-
-
-
+### 6. Ver datos a la base de datos
+Para ver los datos que insertamos podemos verlos en la ruta  ```http://localhost:8080/api/users``` pero con el metodo get
