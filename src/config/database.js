@@ -1,8 +1,8 @@
 export const configSQL = {
     user: "sa",
-    password: "Password123",
+    password: "YourPassword123!",
     database: "Lienzo",
-    server: 'DESKTOP-SH6N7F1\\SQLExpress',
+    server: 'localhost',
     pool: {
         max: 10,
         min: 0,
